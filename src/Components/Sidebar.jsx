@@ -36,27 +36,27 @@ const Sidebar = () => {
         {/* Liked Songs Section */}
         <div className="p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4">
           <div>
-          <h1>Liked Song</h1>
-          <p className="font-light">It's easy, we will help you</p>
-          <Link to="/DisplayLikedSongs">
-          <button className="px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4">
-            Liked Songs
-          </button>
-          </Link>
+            <h1>Liked Songs</h1>
+            <p className="font-light">It's easy, we will help you</p>
+            <Link to="/DisplayLikedSongs">
+              <button className="px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4">
+                Liked Songs
+              </button>
+            </Link>
+          </div>
+
+          {/* Podcasts Section */}
+          <div className="mt-5 pb-5">
+            <h1>Let's find some podcasts to follow</h1>
+            <p className="font-light">We'll keep you updated on new episodes</p>
+            <Link to="/CommingSoon">
+              <button className="px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4">
+                Browse Podcasts
+              </button>
+            </Link>
+          </div>
         </div>
 
-        {/* Podcasts Section */}
-        <div className="mt-5 pb-5">
-  <h1>Let's find some podcasts to follow</h1>
-  <p className="font-light">We'll keep you updated on new episodes</p>
-  <Link to="/CommingSoon">
-    <button className="px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4">
-      Browse Podcasts
-    </button>
-  </Link>
-</div>
-
-</div>
         {/* Legal Links Section */}
         <div className="flex flex-col gap-2 text-sm text-zinc-400 pl-4 mt-5 pr-2.5">
           <div className="flex justify-between">
@@ -76,13 +76,13 @@ const Sidebar = () => {
 
         {/* Language Selector */}
         <Link to="/CommingSoon">
-          <div className="py-4 p-2.5">
-            <div className="mt-4 border rounded-full border-gray-700 text-white font-semibold flex justify-center items-center hover:border-white hover:scale-105 cursor-pointer">
-              <Icon icon="lucide:globe" />
-              <div className="p-1">English</div>
-            </div>
-          </div>
-        </Link>
+  <div className="py-4 p-2.5">
+    <div className="mt-4 border rounded-full border-gray-700 text-white font-semibold flex justify-center items-center hover:border-white hover:scale-105 cursor-pointer w-full max-w-xs overflow-hidden">
+      <Icon icon="lucide:globe" className="mr-1" />
+      <div className="p-1 text-center break-words truncate">English</div>
+    </div>
+  </div>
+</Link>
       </div>
     </div>
   );
