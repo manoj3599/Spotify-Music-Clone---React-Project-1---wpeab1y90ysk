@@ -84,9 +84,10 @@ const Navbar = () => {
           <p className="bg-white text-black text-[15px] px-4 py-1 rounded-2xl hidden md:block cursor-pointer">
             <Link to="/Premium">Explore Premium</Link>
           </p>
+          <Link to="/CommingSoon">
           <p className="bg-black py-1 px-3 rounded-2xl text-[15px] cursor-pointer">
             Install App
-          </p>
+          </p></Link>
           {/*!getUser && (
             <>
               <p className="bg-black py-1 px-3 rounded-2xl text-[15px] cursor-pointer">
@@ -167,9 +168,10 @@ const Navbar = () => {
           <p className="text-white px-4 py-1 rounded-2xl cursor-pointer">
             <Link to="/Music">Music</Link>
           </p>
+          <Link to="/CommingSoon">
           <p className="text-white px-4 py-1 rounded-2xl cursor-pointer">
             Podcasts
-          </p>
+          </p></Link>
         </div>
       )}
     </>

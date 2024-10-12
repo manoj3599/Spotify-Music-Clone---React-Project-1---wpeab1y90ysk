@@ -66,20 +66,20 @@ const DisplayArtist = () => {
   return (
     <>
       <Navbar />
-      <div className="mt-10 flex flex-col md:flex-row md:items-end gap-8">
-        <img className="w-full md:w-48 rounded" src={artistData.image} alt="Artist" />
-        <div className="flex flex-col">
-          <p className="text-sm md:text-base">Playlist</p>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">{artistData.name}</h2>
-          <p className="mt-1 flex items-center text-sm md:text-base">
+      <div className="mt-10 flex flex-col md:flex-row md:items-end gap-8 px-4 sm:px-8">
+        <img className="w-full sm:w-48 rounded" src={artistData.image} alt="Artist" />
+        <div className="flex flex-col items-start md:items-start">
+          <p className="text-sm md:text-base text-[#a7a7a7]">Playlist</p>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">{artistData.name}</h2>
+          <p className="mt-1 flex items-center text-sm md:text-base text-[#a7a7a7]">
             <img className="inline-block w-5" src={assets.spotify_logo} alt="Spotify Logo" />
-            <b className="ml-2">Spotify</b>
-            <b className="ml-4">By Manoj Nayak</b>
+            <b className="ml-2 text-white">Spotify</b>
+            <b className="ml-4 text-white">By Manoj Nayak</b>
           </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-4 mt-10 mb-4 pl-2 text-[#a7a7a7]">
+      <div className="grid grid-cols-3 sm:grid-cols-4 mt-10 mb-4 pl-2 text-[#a7a7a7] px-4 sm:px-8">
         <p className="flex items-center">
           <b className="mr-4">#</b>Title
         </p>
@@ -88,7 +88,7 @@ const DisplayArtist = () => {
         <img className="m-auto w-4" src={assets.clock_icon} alt="Clock Icon" />
       </div>
 
-      <hr />
+      <hr className="mx-4 sm:mx-8" />
 
       {artistData.songs &&
         artistData.songs.map((song, index) => (
@@ -98,14 +98,14 @@ const DisplayArtist = () => {
               handlePlaySongs(song);
               playWithId(song);
             }}
-            className="grid grid-cols-3 sm:grid-cols-4 gap-2 p-2 items-center text-[#a7a7a7] hover:bg-[#ffffff2b] cursor-pointer"
+            className="grid grid-cols-3 sm:grid-cols-4 gap-2 p-2 items-center text-[#a7a7a7] hover:bg-[#ffffff2b] cursor-pointer px-4 sm:px-8"
           >
             <p className="text-white flex items-center">
               <b className="mr-4 text-[#a7a7a7]">{index + 1}</b>
               <img className="inline w-10 mr-5" src={song.thumbnail} alt={song.title} />
             </p>
             <p className="text-[15px]">{song.title}</p>
-            <p className="text-[15px]">{song.mood}</p>
+            <p className="text-[15px] hidden sm:block">{song.mood}</p>
             <p className="text-[15px] flex justify-center">
               <div className="heart" onClick={(event) => addToFavorites(event, song._id)}>
                 {likedSongs.includes(song._id) ? (
@@ -129,6 +129,7 @@ const DisplayArtist = () => {
             </p>
           </div>
         ))}
+
       <Footer />
     </>
   );
