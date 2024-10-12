@@ -1,38 +1,33 @@
-import React from "react";
-import { useState,useEffect } from "react";
+import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { useUser } from "../UserProvider";
 import { Link, useNavigate, useLocation } from "react-router-dom"; // import useLocation
 import { Icon } from "@iconify/react/dist/iconify.js";
 import IconText from "../navigation/IconText";
-import spt from "../assets/spoti.svg";
 import axios from "axios";
 
 const Navbar = () => {
-  const { getUser, signOutUser, setList} = useUser();
-
+  const { getUser, signOutUser, setList } = useUser();
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [dropdownVisible, setDropdownVisible] = useState(false); // State for dropdown visibility
 
   const onSearchDetails = (event) => {
-    // Create a query string object with the title
     const queryString = {
       title: event.target.value,
     };
     axios
       .get("https://academics.newtonschool.co/api/v1/music/song?", {
         params: {
-          search: JSON.stringify(queryString), // Convert queryString to a JSON string
+          search: JSON.stringify(queryString),
         },
       })
       .then((response) => {
-        setList(response.data.data); // Update the state with the response data
+        setList(response.data.data);
       })
       .catch((error) => {
-        console.error(error); // Log the error in case of failure
+        console.error(error);
       });
   };
-
 
   const onChangeHandler = () => {
     localStorage.removeItem("token");
@@ -40,7 +35,13 @@ const Navbar = () => {
   };
 
   const navigate = useNavigate();
-  const location = useLocation(); 
+  const location = useLocation();
+
+  // Function to toggle dropdown
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
   return (
     <>
       <div className="w-full flex justify-between items-center font-semibold p-4">
@@ -60,24 +61,24 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-2">
-  {location.pathname === "/Search" && (
-    <div className="relative flex justify-start group mr-0">
-      <input
-        className="rounded-full border-2 p-3.5 lg:w-96 w-80 pl-12 text-sm  font-semibold placeholder-neutral-600 hover:bg-neutral-700 bg-neutral-800 text-white"
-        type="text"
-        placeholder="What do you want to listen to?"
-        onChange={onSearchDetails}
-      />
-      <div className="absolute left-3 top-1/2 transform -translate-y-1/2 font-sm text-zinc-400 group-hover:text-white">
-        <IconText
-          iconName="mingcute:search-line"
-          active={true}
-          displayText=""
-        />
-      </div>
-    </div>
-  )}
-</div>
+          {location.pathname === "/Search" && (
+            <div className="relative flex justify-start group mr-0">
+              <input
+                className="rounded-full border-2 p-3.5 lg:w-96 w-80 pl-12 text-sm font-semibold placeholder-neutral-600 hover:bg-neutral-700 bg-neutral-800 text-white"
+                type="text"
+                placeholder="What do you want to listen to?"
+                onChange={onSearchDetails}
+              />
+              <div className="absolute left-3 top-1/2 transform -translate-y-1/2 font-sm text-zinc-400 group-hover:text-white">
+                <IconText
+                  iconName="mingcute:search-line"
+                  active={true}
+                  displayText=""
+                />
+              </div>
+            </div>
+          )}
+        </div>
 
         <div className="flex items-center gap-4">
           <p className="bg-white text-black text-[15px] px-4 py-1 rounded-2xl hidden md:block cursor-pointer">
@@ -86,52 +87,91 @@ const Navbar = () => {
           <p className="bg-black py-1 px-3 rounded-2xl text-[15px] cursor-pointer">
             Install App
           </p>
-          {!getUser && (
+          {/*!getUser && (
             <>
               <p className="bg-black py-1 px-3 rounded-2xl text-[15px] cursor-pointer">
-                {" "}
                 <Link to="/Register">Signup</Link>
               </p>
               <p className="bg-black py-1 px-3 rounded-2xl text-[15px] cursor-pointer">
-                {" "}
                 <Link to="/Login">Login</Link>
               </p>
             </>
-          )}
+          )*/}
 
-          {getUser && getUser.status == "success" && (
+          {/*getUser && getUser.status === "success" && (
             <>
               <p className="bg-black py-1 px-3 rounded-2xl text-[15px] cursor-pointer">
-                {" "}
                 <Link to="/" onClick={onChangeHandler}>
-                  Logout
+                  xyz
                 </Link>
               </p>
             </>
-          )}
-          <p className="bg-purple-500 text-black w-8 h-8 rounded-full flex items-center justify-center text-sm">
-            M
-          </p>
+          )*/}
+
+          {/* "M" Icon with Dropdown Toggle */}
+          <div className="relative">
+            <p
+              className="bg-purple-500 text-black w-8 h-8 rounded-full flex items-center justify-center text-sm cursor-pointer"
+              onClick={toggleDropdown} // Toggle the dropdown on click
+            >
+              M
+            </p>
+
+            {/* Dropdown Menu */}
+            {dropdownVisible && (
+              <div className="absolute right-0 mt-2 py-2 w-48 bg-gray-700 rounded-md shadow-lg z-20">
+                {!getUser && (
+                  <>
+                    <Link
+                      to="/Login"
+                      className="block px-4 py-2 text-white hover:bg-gray-600"
+                      onClick={() => setDropdownVisible(false)} // Close dropdown on selection
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to="/Register"
+                      className="block px-4 py-2 text-white hover:bg-gray-600"
+                      onClick={() => setDropdownVisible(false)} // Close dropdown on selection
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
+
+                {getUser && getUser.status === "success" && (
+                  <Link
+                    to="/"
+                    className="block px-4 py-2 text-white hover:bg-gray-600"
+                    onClick={() => {
+                      onChangeHandler();
+                      setDropdownVisible(false); // Close dropdown on logout
+                    }}
+                  >
+                    Logout
+                  </Link>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      {location.pathname === "/Search" ? ( <div>
-        
-        
+      {location.pathname === "/Search" ? (
+        <div></div>
+      ) : (
+        <div className="flex items-center gap-2 mt-4">
+          <p className="bg-white text-black px-4 py-1 rounded-2xl cursor-pointer">
+            <Link to="/">All</Link>
+          </p>
+          <p className="text-white px-4 py-1 rounded-2xl cursor-pointer">
+            <Link to="/Music">Music</Link>
+          </p>
+          <p className="text-white px-4 py-1 rounded-2xl cursor-pointer">
+            Podcasts
+          </p>
         </div>
-        ) : (
-      <div className="flex items-center gap-2 mt-4">
-        <p className="bg-white text-black px-4 py-1 rounded-2xl cursor-pointer">
-          <Link to="/">All</Link>
-        </p>
-        <p className="text-white px-4 py-1 rounded-2xl cursor-pointer">
-          <Link to="/Music">Music</Link>
-        </p>
-        <p className="text-white px-4 py-1 rounded-2xl cursor-pointer">
-          Podcasts
-        </p>
-      </div>)
-}
+      )}
     </>
   );
 };
