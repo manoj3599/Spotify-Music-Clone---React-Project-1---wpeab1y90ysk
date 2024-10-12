@@ -42,6 +42,7 @@ import song2 from  './song2.mp3'
 import song3 from  './song3.mp3'
 import spotify_logo from './spotify_logo.png'
 
+
 export const assets = {
     bell_icon,
     home_icon,

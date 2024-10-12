@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+
 function Register() {
   const [getData, setData] = useState({
     email: "",
@@ -102,7 +103,7 @@ function Register() {
         </form>
 
         <div className="text-center mt-6 text-sm text-gray-400">
-          <a href="#" className="hover:underline">Use phone number instead</a>
+          <a href="#" className="hover:underline">Already have an account? <Link  to='/Login'>Log in here.</Link></a>
         </div>
       </div>
     </div>

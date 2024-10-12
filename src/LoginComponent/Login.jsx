@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useUser } from "../UserProvider";
+import Navbar from "../Components/Navbar";
 
 function Login() {
   const{getUser,signInUser} = useUser();
@@ -52,6 +53,7 @@ function Login() {
   };
 
   return (
+    <div>
     <div className="flex justify-center items-center h-screen bg-black">
       <div className="bg-black text-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <Link  to='/'><img
@@ -103,6 +105,7 @@ function Login() {
           </a>
         </div>
       </div>
+    </div>
     </div>
   );
 }
