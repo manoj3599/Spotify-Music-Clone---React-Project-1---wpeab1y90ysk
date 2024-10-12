@@ -108,7 +108,14 @@ const Search = () => {
         )}
       </div>
     ))
-  ) : (
+  ) :
+  selectedTab === "Songs" && getSongs.length === 0 ? (
+    <p>No text found</p>
+  ) : 
+  selectedTab === "Songs" && getSongs.length === 0 ? (
+    <p>No text found</p>
+  ) :
+  (
     // Otherwise, display all songs/albums based on selected tab
     selectedTab === "Songs" ? (
       getSongs.map((song, index) => (
